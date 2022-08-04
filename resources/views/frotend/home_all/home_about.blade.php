@@ -19,17 +19,17 @@ $allMultiImage = App\Models\MultiImage::all();
                 <div class="about__content">
                     <div class="section__title">
                         <span class="sub-title">01 - About me</span>
-                        <h2 class="title">{{ $about->title }}</h2>
+                        {{-- <h2 class="title">{{ $about->title }}</h2> --}}
                     </div>
                     <div class="about__exp">
                         <div class="about__exp__icon">
                             <img src="{{ asset('frotend/assets/img/icons/about_icon.png') }}" alt="">
                         </div>
                         <div class="about__exp__content">
-                            <p>{{ $about->short_title }}</p>
+                            {{-- <p>{{ $about->short_title }}</p> --}}
                         </div>
                     </div>
-                    <p class="desc">{{ $about->short_description }}</p>
+                    {{-- <p class="desc">{{ $about->short_description }}</p> --}}
                     <a href="about.html" class="btn">Download my resume</a>
                 </div>
             </div>
