@@ -9,10 +9,10 @@ $footer = App\Models\Footer::find(1);
                 <div class="footer__widget">
                     <div class="fw-title">
                         <h5 class="sub-title">Contact us</h5>
-                        <h4 class="title">{{ $footer->number }}</h4>
+                        {{-- <h4 class="title">{{ $footer->number }}</h4> --}}
                     </div>
                     <div class="footer__widget__text">
-                        <p>{{ $footer->shor_description }}</p>
+                        {{-- <p>{{ $footer->shor_description }}</p> --}}
                     </div>
                 </div>
             </div>
@@ -23,8 +23,8 @@ $footer = App\Models\Footer::find(1);
                         <h4 class="title">AUSTRALIA</h4>
                     </div>
                     <div class="footer__widget__address">
-                        <p>{{ $footer->address }}</p>
-                        <a href="mailto:{{ $footer->email }}" class="mail">{{ $footer->email }}</a>
+                        {{-- <p>{{ $footer->address }}</p> --}}
+                        {{-- <a href="mailto:{{ $footer->email }}" class="mail">{{ $footer->email }}</a> --}}
                     </div>
                 </div>
             </div>
@@ -37,8 +37,8 @@ $footer = App\Models\Footer::find(1);
                     <div class="footer__widget__social">
                         <p>Lorem ipsum dolor sit amet enim. <br> Etiam ullamcorper.</p>
                         <ul class="footer__social__list">
-                            <li><a href="{{ $footer->facebook }}"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="{{ $footer->twitter }}"><i class="fab fa-twitter"></i></a></li>
+                            {{-- <li><a href="{{ $footer->facebook }}"><i class="fab fa-facebook-f"></i></a></li> --}}
+                            {{-- <li><a href="{{ $footer->twitter }}"><i class="fab fa-twitter"></i></a></li> --}}
                             <li><a href="#"><i class="fab fa-behance"></i></a></li>
                             <li><a href="#"><i class="fab fa-linkedin-in"></i></a></li>
                             <li><a href="#"><i class="fab fa-instagram"></i></a></li>
@@ -51,7 +51,7 @@ $footer = App\Models\Footer::find(1);
             <div class="row">
                 <div class="col-12">
                     <div class="copyright__text text-center">
-                        <p> {{ $footer->copyright }}</p>
+                        {{-- <p> {{ $footer->copyright }}</p> --}}
                     </div>
                 </div>
             </div>
