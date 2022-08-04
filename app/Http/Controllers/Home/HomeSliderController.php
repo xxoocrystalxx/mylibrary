@@ -11,7 +11,7 @@ class HomeSliderController extends Controller
 {
     public function HomeSlider()
     {
-        $homeslide = HomeSlide::find(1);
+        $homeslide = HomeSlide::findorFail();
 
         return view('admin.home_slide.home_slide_all', compact('homeslide'));
     } // End Method
