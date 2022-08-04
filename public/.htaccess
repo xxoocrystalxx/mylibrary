@@ -4,15 +4,10 @@
     </IfModule>
 
     RewriteEngine On
-    RewriteBase /
-
-    RewriteCond %{HTTP:X-Forwarded-Proto} !=https
-    RewriteCond %{HTTPS} =off
-    RewriteRule ^ https://boiling-ridge-86913.herokuapp.com%{REQUEST_URI} [L,R=301]
 
     # Handle Authorization Header
-    RewriteCond %{HTTPS:Authorization} .
-    RewriteRule .* - [E=HTTPS_AUTHORIZATION:%{HTTPS:Authorization}]
+    RewriteCond %{HTTP:Authorization} .
+    RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 
     # Redirect Trailing Slashes If Not A Folder...
     RewriteCond %{REQUEST_FILENAME} !-d
