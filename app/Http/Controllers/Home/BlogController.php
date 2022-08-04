@@ -56,7 +56,7 @@ class BlogController extends Controller
         $blog_id = $request->id;
 
         if ($request->file('blog_image')) {
-            // unlink($request->image);
+            unlink($request->image);
             $image = $request->file('blog_image');
             $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
             Image::make($image)->resize(430, 327)->save('upload/blog/' . $name_gen);
