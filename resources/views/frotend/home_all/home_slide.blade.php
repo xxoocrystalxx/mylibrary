@@ -11,8 +11,8 @@ $homeslide = App\Models\HomeSlide::find(1);
             </div>
             <div class="col-xl-5 col-lg-6">
                 <div class="banner__content">
-                    <h2 class="title wow fadeInUp" data-wow-delay=".2s"><span>{{ $homeslide->title }}</h2>
-                    <p class="wow fadeInUp" data-wow-delay=".4s">{{ $homeslide->short_title }}</p>
+                    {{-- <h2 class="title wow fadeInUp" data-wow-delay=".2s"><span>{{ $homeslide->title }}</h2> --}}
+                    {{-- <p class="wow fadeInUp" data-wow-delay=".4s">{{ $homeslide->short_title }}</p> --}}
                     <a href="about.html" class="btn banner__btn wow fadeInUp" data-wow-delay=".6s">more about me</a>
                 </div>
             </div>
@@ -22,6 +22,6 @@ $homeslide = App\Models\HomeSlide::find(1);
         <a href="#aboutSection" class="scroll__link">Scroll down</a>
     </div>
     <div class="banner__video">
-        <a href="{{ $homeslide->video_url }}" class="popup-video"><i class="fas fa-play"></i></a>
+        {{-- <a href="{{ $homeslide->video_url }}" class="popup-video"><i class="fas fa-play"></i></a> --}}
 
 </section>
