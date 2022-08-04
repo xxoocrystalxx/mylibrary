@@ -33,13 +33,15 @@
             <div class="col-xl-3">
                 <div class="services__item">
                     <div class="services__thumb">
-                        <a href="services-details.html"><img src="assets/img/images/services_img01.jpg"
-                                alt=""></a>
+                        <a href="services-details.html"><img
+                                src="{{ asset('frotend/assets/img/images/services_img01.jpg') }}" alt=""></a>
                     </div>
                     <div class="services__content">
                         <div class="services__icon">
-                            <img class="light" src="assets/img/icons/services_light_icon01.png" alt="">
-                            <img class="dark" src="assets/img/icons/services_icon01.png" alt="">
+                            <img class="light" src="{{ asset('frotend/assets/img/icons/services_light_icon01.png') }}"
+                                alt="">
+                            <img class="dark" src="{{ asset('frotend/assets/img/icons/services_icon01.png') }}"
+                                alt="">
                         </div>
                         <h3 class="title"><a href="services-details.html">Business Strategy</a></h3>
                         <p>Strategy is a forward-looking plan for your brand’s behavior. Strategy is a
@@ -57,13 +59,15 @@
             <div class="col-xl-3">
                 <div class="services__item">
                     <div class="services__thumb">
-                        <a href="services-details.html"><img src="assets/img/images/services_img02.jpg"
-                                alt=""></a>
+                        <a href="services-details.html"><img
+                                src="{{ asset('frotend/assets/img/images/services_img02.jpg') }}" alt=""></a>
                     </div>
                     <div class="services__content">
                         <div class="services__icon">
-                            <img class="light" src="assets/img/icons/services_light_icon02.png" alt="">
-                            <img class="dark" src="assets/img/icons/services_icon02.png" alt="">
+                            <img class="light" src="{{ asset('frotend/assets/img/icons/services_light_icon02.png') }}"
+                                alt="">
+                            <img class="dark" src="{{ asset('frotend/assets/img/icons/services_icon02.png') }}"
+                                alt="">
                         </div>
                         <h3 class="title"><a href="services-details.html">Brand Strategy</a></h3>
                         <p>Strategy is a forward-looking plan for your brand’s behavior. Strategy is a
@@ -81,13 +85,15 @@
             <div class="col-xl-3">
                 <div class="services__item">
                     <div class="services__thumb">
-                        <a href="services-details.html"><img src="assets/img/images/services_img03.jpg"
-                                alt=""></a>
+                        <a href="services-details.html"><img
+                                src="{{ asset('frotend/assets/img/images/services_img03.jpg') }}" alt=""></a>
                     </div>
                     <div class="services__content">
                         <div class="services__icon">
-                            <img class="light" src="assets/img/icons/services_light_icon03.png" alt="">
-                            <img class="dark" src="assets/img/icons/services_icon03.png" alt="">
+                            <img class="light" src="{{ asset('frotend/assets/img/icons/services_light_icon03.png') }}"
+                                alt="">
+                            <img class="dark" src="{{ asset('frotend/assets/img/icons/services_icon03.png') }}"
+                                alt="">
                         </div>
                         <h3 class="title"><a href="services-details.html">Product Design</a></h3>
                         <p>Strategy is a forward-looking plan for your brand’s behavior. Strategy is a
@@ -105,8 +111,8 @@
             <div class="col-xl-3">
                 <div class="services__item">
                     <div class="services__thumb">
-                        <a href="services-details.html"><img src="assets/img/images/services_img04.jpg"
-                                alt=""></a>
+                        <a href="services-details.html"><img
+                                src="{{ asset('frotend/assets/img/images/services_img04.jpg') }}" alt=""></a>
                     </div>
                     <div class="services__content">
                         <div class="services__icon">
