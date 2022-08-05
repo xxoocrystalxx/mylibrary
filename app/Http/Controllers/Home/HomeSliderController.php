@@ -12,7 +12,7 @@ class HomeSliderController extends Controller
     public function HomeSlider()
     {
         $homeslide = HomeSlide::find(1);
-
+        error_log($homeslide);
         return view('admin.home_slide.home_slide_all', compact('homeslide'));
     } // End Method
 
