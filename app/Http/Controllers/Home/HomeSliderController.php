@@ -12,7 +12,6 @@ class HomeSliderController extends Controller
     public function HomeSlider()
     {
         $homeslide = HomeSlide::find(1);
-        error_log($homeslide);
         return view('admin.home_slide.home_slide_all', compact('homeslide'));
     } // End Method
 
@@ -24,7 +23,8 @@ class HomeSliderController extends Controller
                 $data = HomeSlide::find($slide_id);
                 $image = $request->file('home_slide');
                 // unlink($data->home_slide);
-                $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+                // $name_gen = hexdec(uniqid()) . '.' . $image->getClientOriginalExtension();
+                $name_gen = 'home_slide.' . $image->getClientOriginalExtension();
                 Image::make($image)->resize(636, 852)->save('upload/home_slide/' . $name_gen);
                 $save_url = 'upload/home_slide/' . $name_gen;
                 HomeSlide::findorFail($slide_id)->update([
