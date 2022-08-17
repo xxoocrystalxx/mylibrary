@@ -22,7 +22,8 @@
                                     width="50px;" height="72px;"></td>
                             <td><a class="underline" href="{{ route('book.details', $item->book->id) }}">
                                     {{ $item->book->title }}</a> <br>
-                                by {{ $item->book->author->name }}</td>
+                                by <a href="{{ route('author.details', $item->id) }}">{{ $item->book->author->name }}</a>
+                            </td>
                             <td>
                                 {{ $item->rating }}
                             </td>

@@ -14,45 +14,17 @@ $genres = App\Models\Genre::orderBy('name', 'ASC')->get();
 @section('main')
     <div class="page-content">
         <div class="container-fluid">
+            @include('frotend.components.booklist', [
+                'books' => $books,
+                'title' => 'BestSeller',
+                'icon' => 'fas fa-fire text-danger',
+            ])
 
-            <div class="mybox">
-                <h3 class="mytitle"><i class="fas fa-fire text-danger"></i> BestSeller</h3>
-                <div class="newnovels">
-                    <ul>
-                        @foreach ($books as $item)
-                            <li>
-                                <a href="{{ route('book.details', $item->id) }}">
-                                    <div class="book-image">
-                                        <img
-                                            src="{{ !empty($item->image) ? url($item->image) : url('upload/no_image.jpg') }}">
-                                    </div>
-                                </a>
-                            </li>
-                        @endforeach
-
-                    </ul>
-                </div>
-            </div>
-
-            <div class="mybox">
-                <h3 class="mytitle"><i class="mdi mdi-bullhorn text-danger"></i> News Releases</h3>
-                <div class="newnovels">
-
-                    <ul>
-                        @foreach ($latest as $item)
-                            <li>
-                                <a href="{{ route('book.details', $item->id) }}">
-                                    <div class="book-image">
-                                        <img
-                                            src="{{ !empty($item->image) ? url($item->image) : url('upload/no_image.jpg') }}">
-                                    </div>
-                                </a>
-                            </li>
-                        @endforeach
-
-                    </ul>
-                </div>
-            </div>
+            @include('frotend.components.booklist', [
+                'books' => $latest,
+                'title' => 'New Releases',
+                'icon' => 'mdi mdi-bullhorn text-danger',
+            ])
 
             <div class="row genreList">
                 <ul class="row-xl-2">

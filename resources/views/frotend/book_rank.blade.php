@@ -24,7 +24,8 @@
                                 </div>
                             </td>
                             <td><a class="underline" href="{{ route('book.details', $item->id) }}">
-                                    {{ $item->title }}</a> by {{ $item->author->name }}
+                                    {{ $item->title }}</a> by <a
+                                    href="{{ route('author.details', $item->id) }}">{{ $item->author->name }}</a>
                                 <div class="d-none d-sm-block">
                                     <p class="genre-desc">
                                         {!! Str::limit($item->description, 200) !!}</p>
@@ -67,10 +68,10 @@
                 </tbody>
             </table>
         </div>
-
-
     </div>
-    <div id="AddLibraryModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
+
+    @include('frotend.components.addMyLibraryModal')
+    {{-- <div id="AddLibraryModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -116,8 +117,8 @@
                 </div>
             </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
-    </div>
-    <script type='text/javascript'>
+    </div> --}}
+    {{-- <script type='text/javascript'>
         $(document).ready(function() {
             var exampleModal = document.getElementById('AddLibraryModal')
             exampleModal.addEventListener('show.bs.modal', function(event) {
@@ -136,5 +137,5 @@
                 modalBodyInput.value = recipient
             })
         });
-    </script>
+    </script> --}}
 @endsection

@@ -24,7 +24,8 @@
                                 </div>
                             </td>
                             <td><a class="underline" href="{{ route('book.details', $item->id) }}">
-                                    {{ $item->title }}</a> by {{ $item->author->name }}
+                                    {{ $item->title }}</a> by <a
+                                    href="{{ route('author.details', $item->id) }}">{{ $item->author->name }}</a>
                                 <div class="d-none d-sm-block">
                                     <p class="genre-desc">
                                         {!! Str::limit($item->description, 200) !!}</p>
