@@ -6,10 +6,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class AuthenticatedSessionController extends Controller
 {
+
     /**
      * Display the login view.
      *
@@ -34,8 +36,18 @@ class AuthenticatedSessionController extends Controller
 
         $notification = array('message' => 'User Login Successfully', 'alert-type' => 'success');
 
-        return redirect()->intended(RouteServiceProvider::HOME)->with($notification);
+        $usertype = auth()->user()->type;
+
+        if ($usertype == 'super-admin' || $usertype == 'manager') {
+            return redirect()->route('dashboard')->with($notification);
+        } else {
+            return
+                redirect()->route('home')->with($notification);
+        }
+
+        // return redirect()->intended(RouteServiceProvider::HOME)->with($notification);
     }
+
 
     /**
      * Destroy an authenticated session.

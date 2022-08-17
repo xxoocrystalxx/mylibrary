@@ -9,6 +9,16 @@ use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function destroy(Request $request)
     {
         Auth::guard('web')->logout();
@@ -19,21 +29,21 @@ class AdminController extends Controller
 
         $notification = array('message' => 'User Logout Successfully', 'alert-type' => 'success');
 
-        return redirect('/login')->with($notification);
+        return redirect('/')->with($notification);
     } // End Method
 
     public function Profile()
     {
         $id = Auth::user()->id;
         $adminData = User::find($id);
-        return view('admin.admin_profile_view', compact('adminData'));
+        return view('admin.profile.profile_view', compact('adminData'));
     } // End Method
 
     public function EditProfile()
     {
         $id = Auth::user()->id;
         $editData = User::find($id);
-        return view('admin.admin_profile_edit', compact('editData'));
+        return view('admin.profile.profile_edit', compact('editData'));
     }
 
     public function StoreProfile(Request $request)
@@ -51,19 +61,19 @@ class AdminController extends Controller
         }
         $data->save();
 
-        $notification = array('message' => 'Admin Profile Updated Successfully', 'alert-type' => 'success');
+        $notification = array('message' => 'Profile Updated Successfully', 'alert-type' => 'success');
 
         return redirect()->route('admin.profile')->with($notification);
     } // End Method
 
     public function ChangePassword()
     {
-        return view('admin.admin_change_password');
+        return view('admin.profile.change_password');
     } //End Method
 
     public function UpdatePassword(Request $request)
     {
-        $validateData = $request->validate(([
+        $request->validate(([
             'oldpassword' => 'required',
             'newpassword' => 'required',
             'confirm_password' => 'required|same:newpassword',
@@ -80,4 +90,18 @@ class AdminController extends Controller
             return redirect()->back();
         }
     } //End Method
+
+    public function AllUser()
+    {
+        $my = Auth::user()->id;
+        $users = User::orderBy('type', 'DESC')->get();
+        return view('admin.user.user_all', compact('users', 'my'));
+    }
+
+    public function DeleteUser($id)
+    {
+        $book = User::findorFail($id)->delete();
+        $notification = array('message' => 'User Deleted Successfully', 'alert-type' => 'success');
+        return redirect()->back()->with($notification);
+    }
 }

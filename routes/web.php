@@ -2,22 +2,110 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Home\HomeSliderController;
-use App\Http\Controllers\Home\AboutController;
-use App\Http\Controllers\Home\PortfolioController;
-use App\Http\Controllers\Home\BlogCategoryController;
-use App\Http\Controllers\Home\BlogController;
-use App\Http\Controllers\Home\ContactController;
-use App\Http\Controllers\Home\FooterController;
+use App\Http\Controllers\Dashboard\AuthorController;
+use App\Http\Controllers\Dashboard\BookController;
+use App\Http\Controllers\Dashboard\GenreController;
+use App\Http\Controllers\Dashboard\MyLibraryController;
+use App\Http\Controllers\Dashboard\ReviewController;
+
+/*------------------------------------------
+Guest Routes List
+--------------------------------------------*/
 
 Route::get('/', function () {
     return view('frotend.index');
+})->name('home');
+
+Route::controller(BookController::class)->group(function () {
+    Route::get('/book/details/{id}', 'BookDetails')->name('book.details');
+    Route::get('/book/rank', 'BookRank')->name('book.rank');
 });
 
-Route::get('/L8x', function () {
-    return view('frotend.index');
+Route::get('/genre/details/{id}', [GenreController::class, 'GenreDetails'])->name('genre.details');
+Route::get('/genre/list', [GenreController::class, 'GenreList'])->name('genre.list');
+Route::get('/author/list', [AuthorController::class, 'AuthorList'])->name('author.list');
+Route::get('/author/details/{id}', [AuthorController::class, 'AuthorDetails'])->name('author.details');
+
+Route::post('/search', [BookController::class, 'SearchList'])->name('search');
+
+/*------------------------------------------
+MANAGER and ADMIN Routes List
+--------------------------------------------*/
+Route::middleware(['auth', 'user-access:manager,super-admin'])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('admin.index');
+    })->name('dashboard');
+
+    Route::controller(AuthorController::class)->group(function () {
+        Route::get('/all/author', 'AllAuthor')->name('all.author');
+        Route::get('/add/author', 'AddAuthor')->name('add.author');
+        Route::post('/store/author', 'StoreAuthor')->name('store.author');
+        Route::post('/update/author/{id}', 'UpdateAuthor')->name('update.author');
+        Route::get('/delete/author/{id}', 'DeleteAuthor')->name('delete.author');
+    });
+
+    Route::controller(BookController::class)->group(function () {
+        Route::get('/all/book', 'AllBook')->name('all.book');
+        Route::get('/add/book', 'AddBook')->name('add.book');
+        Route::post('/store/book', 'StoreBook')->name('store.book');
+        Route::get('/delete/book/{id}', 'DeleteBook')->name('delete.book');
+        Route::get('/edit/book/{id}', 'EditBook')->name('edit.book');
+        Route::post('/update/book', 'UpdateBook')->name('update.book');
+    });
+
+    Route::controller(GenreController::class)->group(function () {
+        Route::get('/all/genre', 'AllGenre')->name('all.genre');
+        Route::get('/add/genre', 'AddGenre')->name('add.genre');
+        Route::post('/store/genre', 'StoreGenre')->name('store.genre');
+        Route::post('/update/genre/{id}', 'UpdateGenre')->name('update.genre');
+        Route::get('/delete/genre/{id}', 'DeleteGenre')->name('delete.genre');
+    });
 });
 
+
+/*------------------------------------------
+Normal Users Routes List
+--------------------------------------------*/
+Route::middleware(['auth', 'user-access:user'])->group(function () {
+    Route::get('/write/review/{id}', [ReviewController::class, 'WriteReview'])->name('write.review');
+    Route::post('/store/rating/{id}', [ReviewController::class, 'StoreRating']);
+
+    Route::controller(ReviewController::class)->group(function () {
+        Route::get('/write/review/{id}', 'WriteReview')->name('write.review');
+        Route::post('/store/rating/{id}', 'StoreRating');
+        Route::post('/store/review/', 'StoreReview')->name('store.review');
+        Route::get('/my/reviews', 'MyReviews')->name('my.reviews');
+        Route::get('/edit/review/{id}', 'EditReview')->name('edit.review');
+        Route::get('/delete/review/{id}', 'DeleteReview')->name('delete.review');
+        Route::post('/update/review/{id}', 'UpdateReview')->name('update.review');
+    });
+
+    Route::controller(MyLibraryController::class)->group(function () {
+        Route::post('/store/library', 'StoreLibrary')->name('store.library');
+        Route::get('/my/library/', 'MyLibrary')->name('my.library');
+        Route::get('/delete/reading/book/{id}', 'DeleteReadingBook')->name('delete.reading.book');
+    });
+});
+
+/*------------------------------------------
+All Super Admin Routes List
+--------------------------------------------*/
+Route::middleware(['auth', 'user-access:super-admin'])->group(function () {
+});
+
+/*------------------------------------------
+All Admin Routes List
+--------------------------------------------*/
+Route::middleware(['auth', 'user-access:manager'])->group(function () {
+    Route::controller(AdminController::class)->group(function () {
+        Route::get('/all/user', 'AllUser')->name('all.user');
+        Route::get('/delete/user/{id}', 'DeleteUser')->name('delete.user');
+    });
+});
+
+/*------------------------------------------
+All logged user routes
+--------------------------------------------*/
 Route::middleware(['auth'])->group(function () {
     Route::controller(AdminController::class)->group(function () {
         Route::get('/admin/logout', 'destroy')->name('admin.logout');
@@ -29,72 +117,5 @@ Route::middleware(['auth'])->group(function () {
     });
 });
 
-
-Route::controller(HomeSliderController::class)->group(function () {
-    Route::get('/home/slide', 'HomeSlider')->name('home.slide');
-    Route::post('/update/slider', 'UpdateSlider')->name('update.slider');
-    Route::get('/home', 'Home')->name('home');
-});
-
-Route::controller(AboutController::class)->group(function () {
-    Route::get('/about/page', 'AboutPage')->name('about.page');
-    Route::post('/update/about', 'UpdateAbout')->name('update.about');
-    Route::get('/about', 'HomeAbout')->name('home.about');
-    Route::get('/about/multi/image', 'AboutMultiImage')->name('about.multi.image');
-    Route::post('/store/multi/image', 'StoreMultiImage')->name('store.multi.image');
-    Route::get('/all/multi/image', 'AllMultiImage')->name('all.multi.image');
-    Route::get('/delete/multi/image/{id}', 'DeleteMultiImage')->name('delete.multi.image');
-    Route::get('/edit/multi/image/{id}', 'EditMultiImage')->name('edit.multi.image');
-    Route::post('/update/multi/image', 'UpdateMultiImage')->name('update.multi.image');
-});
-
-Route::controller(PortfolioController::class)->group(function () {
-    Route::get('/all/portfolio', 'AllPortfolio')->name('all.portfolio');
-    Route::get('/add/portfolio', 'AddPortfolio')->name('add.portfolio');
-    Route::post('/store/portfolio', 'StorePortfolio')->name('store.portfolio');
-    Route::get('/edit/portfolio/{id}', 'EditPortfolio')->name('edit.portfolio');
-    Route::post('/update/portfolio', 'UpdatePortfolio')->name('update.portfolio');
-    Route::get('/delete/portfolio/{id}', 'DeletePortfolio')->name('delete.portfolio');
-    Route::get('/portfolio/details/{id}', 'PortfolioDetails')->name('portfolio.details');
-    Route::get('/home/portfolio', 'HomePortfolio')->name('home.portfolio');
-});
-
-Route::controller(BlogCategoryController::class)->group(function () {
-    Route::get('/all/blog/category', 'AllBlogCategory')->name('all.blog.category');
-    Route::get('/add/blog/category', 'AddBlogCategory')->name('add.blog.category');
-    Route::post('/store/blog/category', 'StoreBlogCategory')->name('store.blog.category');
-    Route::get('/edit/blog/category/{id}', 'EditBlogCategory')->name('edit.blog.category');
-    Route::post('/update/blog/category/{id}', 'UpdateBlogCategory')->name('update.blog.category');
-    Route::get('/delete/blog/category/{id}', 'DeleteBlogCategory')->name('delete.blog.category');
-});
-
-Route::controller(BlogController::class)->group(function () {
-    Route::get('/all/blog', 'AllBlog')->name('all.blog');
-    Route::get('/add/blog', 'AddBlog')->name('add.blog');
-    Route::post('/store/blog', 'StoreBlog')->name('store.blog');
-    Route::get('/edit/blog/{id}', 'EditBlog')->name('edit.blog');
-    Route::get('/delete/blog/{id}', 'DeleteBlog')->name('delete.blog');
-    Route::post('/update/blog', 'UpdateBlog')->name('update.blog');
-
-    Route::get('/blog/details/{id}', 'BlogDetails')->name('blog.details');
-    Route::get('/category/blog/{id}', 'CategoryBlog')->name('category.blog');
-    Route::get('/blog', 'HomeBlog')->name('home.blog');
-});
-
-Route::controller(FooterController::class)->group(function () {
-    Route::get('/footer/setup', 'FooterSetup')->name('footer.setup');
-    Route::post('/update/footer', 'UpdateFooter')->name('update.footer');
-});
-
-Route::controller(ContactController::class)->group(function () {
-    Route::get('/contact', 'Contact')->name('contact.me');
-    Route::post('/store/message', 'StoreMessage')->name('store.message');
-    Route::get('/contact/message', 'ContactMessage')->name('contact.message');
-    Route::get('/delete/message/{id}', 'DeleteMessage')->name('delete.message');
-});
-
-Route::get('/dashboard', function () {
-    return view('admin.index');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 require __DIR__ . '/auth.php';
