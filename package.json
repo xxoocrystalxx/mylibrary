@@ -3,7 +3,7 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "deploy": "git add . && git commit -m uibuild"
+        "deploy": "git add . && git commit -m uibuild && git push origin main"
     },
     "devDependencies": {
         "@tailwindcss/forms": "^0.5.2",
