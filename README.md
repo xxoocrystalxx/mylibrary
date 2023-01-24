@@ -6,5 +6,25 @@
 
 [LIVE DEMO](https://boiling-ridge-86913.herokuapp.com/)
 
+manager user:manager, password:123456
 admin user: admin, password: 123456
 normal user: user, password:123456
+
+### To run local
+
+<p>Set up db connection on .env file.
+<p>Run on cmd:
+
+```bash
+php artisan config:cache
+php artisan migrate
+php artisan db:seed --class=CreateUsersSeeder
+php artisan db:seed --class=DatabaseSeeder
+```
+
+<p>Then start the app with:
+
+```bash
+php artisan serve
+npm run dev
+```

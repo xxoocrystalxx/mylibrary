@@ -17,10 +17,19 @@ class CreateUsersSeeder extends Seeder
 
         $users = [
             [
-                'name' => 'User2',
-                'username' => 'user2',
-                'email' => 'user2@nicesnippets.com',
-                'type' => 0,
+                'name' => 'Admin',
+                'username' => 'admin',
+                'email' => 'admin@nicesnippets.com',
+                'type' => 1,
+                'profile_image' => '202208171428ace.jpg',
+                'password' => bcrypt('123456'),
+            ],
+            [
+                'name' => 'Manager',
+                'username' => 'manager',
+                'email' => 'manager@nicesnippets.com',
+                'type' => 2,
+                'profile_image' => '202208171439flagStraw.jpg',
                 'password' => bcrypt('123456'),
             ],
             [
